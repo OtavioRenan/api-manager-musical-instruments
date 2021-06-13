@@ -9,6 +9,7 @@ services:
     working_dir: /application
     volumes:
       - .:/application
+      - ./infra/mysql/api_manager_musical_instruments_db:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=api_manager_musical_db
       - MYSQL_USER=api_manager_musical_root
