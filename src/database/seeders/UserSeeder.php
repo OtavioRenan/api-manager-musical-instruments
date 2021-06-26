@@ -14,11 +14,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $model = new \App\Main\User\Model\UserModel();
+        $model = new \App\Models\AuthModel();
 
-        $model->user_name = 'ADMINISTRADOR';
-        $model->user_login = 'admin';
-        $model->user_password = \Illuminate\Support\Facades\Hash::make('admin');
+        $model->name = 'ADMINISTRADOR';
+        $model->login = 'admin';
+        $model->password = bcrypt('admin');
 
         $model->save();
     }

@@ -23,7 +23,7 @@ class InstrumentTypeSeeder extends Seeder
 
         foreach($types as $type)
         {
-            $model = new \App\Main\InstrumentType\Model\InstrumentTypeModel();
+            $model = new \App\Models\InstrumentTypeModel();
 
             $model->inst_typ_name = $type['inst_typ_name'];
             $model->inst_typ_slug = \Illuminate\Support\Str::slug($type['inst_typ_name']);

@@ -25,20 +25,16 @@ class AutenticationMiddleware
     {
         try {
             $token = $request->bearerToken();
-
+            
             if ($token === null) {
-                return response()->json(['message' => 'Token não informado.'], 500);
+                return redirect('/login')->withError('message', 'Token não informado.');
             }
-
-            $datas = $this->service->extractDatas($token);
-
-            $request->request->add(['user' => $datas->data->id]);
 
             return $next($request);
 
-        } catch (\Firebase\JWT\ExpiredException $e) {
-
-            return response()->json(['message' => 'Token expirado.'], 401);
+        } catch (\Exception $e) {
+            
+            return redirect('/login')->withError('message', 'Token expirado.');
         }
 
         return $next($request);

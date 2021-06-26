@@ -13,16 +13,16 @@ class AutenticationRequest extends \Illuminate\Foundation\Http\FormRequest
     public function rules()
     {
         return [
-            'login' => ['required'],
-            'password' => ['required']
+            'userLogin' => ['required'],
+            'userPassword' => ['required']
         ];
     }
 
     public function messages()
     {
         return [
-            'login.required' => 'O campo login é obrigatório.',
-            'password.required' => 'O campo senha é obrigatório.'
+            'userLogin.required' => 'O campo login é obrigatório.',
+            'userPassword.required' => 'O campo senha é obrigatório.'
         ];
     }
 
