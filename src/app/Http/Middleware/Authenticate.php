@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
         if (!$request->expectsJson())
         {
-            return response()->json(['message' => 'Token não informado.', 401]);
+            return response()->json(['message' => 'Token não informado.'], 401);
         }
     }
 }

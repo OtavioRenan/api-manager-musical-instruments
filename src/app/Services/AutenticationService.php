@@ -60,7 +60,14 @@ class AutenticationService
 
     public function userProfile()
     {
-        return response()->json($this->filterOutput(auth()->user()));
+        $user = auth()->user();
+
+        if ($user)
+        {
+            return response()->json($this->filterOutput($user));
+        } 
+
+        return response()->json(['message' => 'Token não informado.'], 401);
     }
 
     protected function createNewToken($token) : Object
