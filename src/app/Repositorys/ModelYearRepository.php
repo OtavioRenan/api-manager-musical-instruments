@@ -26,7 +26,7 @@ class ModelYearRepository
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\ModelExistsException();
+            throw new \Exception('Ano não encontrado.');
         }
 
         return $model;

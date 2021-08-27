@@ -10,7 +10,7 @@ class InstrumentModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'instrument';
+    protected $table = 'instruments';
     protected $primaryKey = 'inst_id';
 
     protected $fillable = [

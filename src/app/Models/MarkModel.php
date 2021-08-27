@@ -10,7 +10,7 @@ class MarkModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'mark';
+    protected $table = 'marks';
     protected $primaryKey = 'mark_id';
 
     protected $fillable = [

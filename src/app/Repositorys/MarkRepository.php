@@ -26,7 +26,7 @@ class MarkRepository
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\MarkExistsException();
+            throw new \Exception('Marca não encontrada.');
         }
 
         return $model;

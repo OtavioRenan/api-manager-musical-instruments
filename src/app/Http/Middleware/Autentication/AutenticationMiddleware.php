@@ -4,6 +4,7 @@ namespace App\Http\Middleware\Autentication;
 
 use Closure;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AutenticationMiddleware
 {
@@ -24,13 +25,15 @@ class AutenticationMiddleware
     public function handle(Request $request, Closure $next)
     {
         try {
-
+            
             $token = $request->bearerToken();
 
             if (is_null($token))
             {
                 return response()->json(['message' => 'Token não informado.'], 401);
             }
+
+            JWTAuth::parseToken()->authenticate();
 
             return $next($request);
 

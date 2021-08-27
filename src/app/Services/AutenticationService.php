@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use Exception;
 class AutenticationService
 {
     public function __construct(\App\Repositorys\AutenticationRepository $autenticationRepository)
@@ -16,17 +17,17 @@ class AutenticationService
 
         if (!$user)
         {
-            throw new \App\Http\Exceptions\AutenticationUserExistsException();
+            throw new Exception('Usuário inválido.'); 
         }
 
         if (!password_verify($input['userPassword'], $user->password))
         {
-            throw new \App\Http\Exceptions\AutenticationPasswordExistsException();
+            throw new Exception('Senha inválida.'); 
         }
         
         if (! $token = auth()->attempt($this->filterInput($input)))
         {
-            throw new \App\Http\Exceptions\AutenticationUnauthorizedException();
+            throw new Exception('Autenticação não autorizada.'); 
         }
         
         return $this->createNewToken($token);
@@ -40,7 +41,7 @@ class AutenticationService
         {
             if(! $token = auth()->attempt($this->filterInput($input)))
             {
-                throw new \App\Http\Exceptions\AutenticationUnauthorizedException();
+                throw new Exception('Autenticação não autorizada.');
             }
         }
 

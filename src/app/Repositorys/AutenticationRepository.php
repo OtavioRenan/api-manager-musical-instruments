@@ -20,7 +20,7 @@ class AutenticationRepository
         $this->model = $authModel;
     }
 
-    public function getWhere(string $input) : AuthModel
+    public function getWhere(string $input)
     {
         return $this->model->where('login', '=', $input)->first();
     }

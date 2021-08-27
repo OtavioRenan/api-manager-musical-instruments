@@ -9,7 +9,7 @@ class UserModel extends Model
 {
     use \Illuminate\Database\Eloquent\Factories\HasFactory;
 
-    protected $table = 'user';
+    protected $table = 'users';
     protected $primaryKey = 'id';
 
     protected $fillable = [

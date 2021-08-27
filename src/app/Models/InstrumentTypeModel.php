@@ -9,7 +9,7 @@ class InstrumentTypeModel extends Model
 {
     use \Illuminate\Database\Eloquent\Factories\HasFactory;
 
-    protected $table = 'instrument_type';
+    protected $table = 'instrument_types';
     protected $primaryKey = 'inst_typ_id';
 
     protected $fillable = [

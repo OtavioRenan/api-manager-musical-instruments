@@ -26,7 +26,7 @@ class ModelRepository
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\ModelExistsException();
+            throw new \Exception('Modelo não encontrado.');
         }
 
         return $model;

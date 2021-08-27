@@ -10,7 +10,7 @@ class ModelYearModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'model_year';
+    protected $table = 'model_years';
     protected $primaryKey = 'model_yea_id';
 
     protected $fillable = [

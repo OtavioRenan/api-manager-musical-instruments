@@ -10,7 +10,7 @@ class ModelModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'model';
+    protected $table = 'models';
     protected $primaryKey = 'mode_id';
 
     protected $fillable = [

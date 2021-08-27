@@ -23,7 +23,7 @@ class InstrumentTypeRepository
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\InstrumentTypeExistsException();
+            throw new \Exception('Tipo de instrumento não encontrado.');
         }
 
         return $model;

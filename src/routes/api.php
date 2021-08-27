@@ -20,4 +20,5 @@ Route::group(['middleware' => 'autentication'], function ()
     Route::resource('model', routeUnion('\Model'));
     Route::resource('model-year', routeUnion('\ModelYear'));
     Route::resource('user', routeUnion('\User'))->only(['show', 'index']);
+    Route::resource('log', routeUnion('\Log'))->only(['show', 'index']);
 });

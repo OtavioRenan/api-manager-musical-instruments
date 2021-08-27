@@ -27,7 +27,7 @@ class UserRepository
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\UserExistsException();
+            throw new \Exception('Usuário não encontrado.');
         }
 
         return $model;

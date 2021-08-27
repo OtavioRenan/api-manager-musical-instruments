@@ -3,37 +3,42 @@ declare(strict_types=1);
 
 namespace App\Repositorys;
 
-class InstrumentRepository
+use App\Models\LogModel;
+use Illuminate\Support\Collection;
+
+class LogRepository
 {
     protected $model;
 
     protected $fields = [
-        'inst_name',
-        'inst_slug',
-        'inst_description',
-        'id_inst_typ',
-        'id_mode',
-        'id_mark'
+        'system_logable_id',
+        'system_logable_type',
+        'user_id',
+        'guard_name',
+        'action',
+        'old_value',
+        'new_value',
+        'ip_address'
     ];
 
-    public function __construct(\App\Models\InstrumentModel $instrumentModel)
+    public function __construct(LogModel $markModel)
     {
-        $this->model = $instrumentModel;
+        $this->model = $markModel;
     }
 
-    public function find(int $id)
+    public function find(int $id) : LogModel
     {
-        $model = $this->model->where('inst_id', '=', $id)->first();
+        $model = $this->model->where('logs_id', '=', $id)->first();
 
         if (!$model)
         {
-            throw new \Exception('Instrumento não encontrado.');
+            throw new \Exception('Log não encontrado.');
         }
 
         return $model;
     }
 
-    public function all()
+    public function all() : Collection
     {
         return $this->model->all();
     }
@@ -50,12 +55,10 @@ class InstrumentRepository
 
         $this->model->save();
 
-        logStore($this->model);
-
         return $this->model;
     }
 
-    public function update(Int $id, Array $input)
+    public function update(Int $id, Array $input) : LogModel
     {
         $model = $this->model->find($id);
 
@@ -69,8 +72,6 @@ class InstrumentRepository
 
         $model->save();
 
-        logStore($model);
-
         return $model;
     }
 
@@ -78,12 +79,10 @@ class InstrumentRepository
     {
         $model = $this->model->find($id);
 
-        logDelete($model);
-
         return $model->delete();
     }
 
-    public function getWhere(Array $input)
+    public function getWhere(Array $input) : Collection
     {
         $fields = $this->fields;
 
