@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Auth;
-
 class AutenticationService
 {
     public function __construct(\App\Repositorys\AutenticationRepository $autenticationRepository)
@@ -26,7 +24,7 @@ class AutenticationService
             throw new \App\Http\Exceptions\AutenticationPasswordExistsException();
         }
         
-        if(! $token = auth()->attempt($this->filterInput($input)))
+        if (! $token = auth()->attempt($this->filterInput($input)))
         {
             throw new \App\Http\Exceptions\AutenticationUnauthorizedException();
         }

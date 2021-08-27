@@ -3,33 +3,36 @@ declare(strict_types=1);
 
 namespace App\Repositorys;
 
-class InstrumentTypeRepository
+use App\Models\MarkModel;
+use Illuminate\Support\Collection;
+
+class MarkRepository
 {
     protected $model;
 
     protected $fields = [
-        'inst_typ_name',
-        'inst_typ_slug'
+        'mark_name',
+        'mark_slug'
     ];
 
-    public function __construct(\App\Models\InstrumentTypeModel $instrumentTypeModel)
+    public function __construct(MarkModel $markModel)
     {
-        $this->model = $instrumentTypeModel;
+        $this->model = $markModel;
     }
 
-    public function find(int $id)
+    public function find(int $id) : MarkModel
     {
-        $model = $this->model->where('inst_typ_id', '=', $id)->first();
+        $model = $this->model->where('mark_id', '=', $id)->first();
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\InstrumentTypeExistsException();
+            throw new \App\Http\Exceptions\MarkExistsException();
         }
 
         return $model;
     }
 
-    public function all()
+    public function all() : Collection
     {
         return $this->model->all();
     }
@@ -49,7 +52,7 @@ class InstrumentTypeRepository
         return $this->model;
     }
 
-    public function update(Int $id, Array $input)
+    public function update(Int $id, Array $input) : MarkModel
     {
         $model = $this->model->find($id);
 
@@ -73,7 +76,7 @@ class InstrumentTypeRepository
         return $model->delete();
     }
 
-    public function getWhere(Array $input)
+    public function getWhere(Array $input) : Collection
     {
         $fields = $this->fields;
 

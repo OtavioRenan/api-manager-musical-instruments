@@ -3,33 +3,36 @@ declare(strict_types=1);
 
 namespace App\Repositorys;
 
-class InstrumentTypeRepository
+use App\Models\ModelYearModel;
+use Illuminate\Support\Collection;
+
+class ModelYearRepository
 {
     protected $model;
 
     protected $fields = [
-        'inst_typ_name',
-        'inst_typ_slug'
+        'mode_yea_launch',
+        'mode_yea_end_of_production'
     ];
 
-    public function __construct(\App\Models\InstrumentTypeModel $instrumentTypeModel)
+    public function __construct(ModelYearModel $modelYearModel)
     {
-        $this->model = $instrumentTypeModel;
+        $this->model = $modelYearModel;
     }
 
-    public function find(int $id)
+    public function find(int $id) : ModelYearModel
     {
-        $model = $this->model->where('inst_typ_id', '=', $id)->first();
+        $model = $this->model->where('mode_yea_id', '=', $id)->first();
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\InstrumentTypeExistsException();
+            throw new \App\Http\Exceptions\ModelExistsException();
         }
 
         return $model;
     }
 
-    public function all()
+    public function all() : Collection
     {
         return $this->model->all();
     }
@@ -49,7 +52,7 @@ class InstrumentTypeRepository
         return $this->model;
     }
 
-    public function update(Int $id, Array $input)
+    public function update(Int $id, Array $input) : ModelYearModel
     {
         $model = $this->model->find($id);
 
@@ -73,7 +76,7 @@ class InstrumentTypeRepository
         return $model->delete();
     }
 
-    public function getWhere(Array $input)
+    public function getWhere(Array $input) : Collection
     {
         $fields = $this->fields;
 

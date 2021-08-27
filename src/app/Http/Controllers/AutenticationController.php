@@ -8,14 +8,13 @@ class AutenticationController extends Controller
 
     public function __construct(\App\Services\AutenticationService $autenticationService)
     {
-        $this->middleware('auth:api', ['except' => ['auth', 'register', 'logout', 'refresh', 'userProfile']]);
         $this->service = $autenticationService;
     }
 
     public function auth(\App\Http\Requests\AutenticationRequest $request)
     {
         try {
-
+            
             $input = $request->all();
 
             $user = $this->service->auth($input);

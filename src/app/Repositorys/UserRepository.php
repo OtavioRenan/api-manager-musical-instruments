@@ -79,16 +79,16 @@ class UserRepository
 
     public function getWhere(Array $input) : Collection
     {
-        $model = $this->model->orderBy('name', 'ASC');
+        $fields = $this->fields;
 
-        if (isset($input['userName']))
-        {
-            $model = $model->where('name', 'ilike', '%'.$input['userName'].'%');
-        }
+        $model = $this->model->orderBy($fields[0], 'ASC');
 
-        if (isset($input['userLogin']))
+        foreach($fields as $field)
         {
-            $model = $model->where('login', 'ilike', '%'.$input['userLogin'].'%');
+            if (isset($input[$field]))
+            {
+                $model = $model->where($field, 'ilike', '%' . $input[$field] . '%');
+            }
         }
 
         return $model->get();

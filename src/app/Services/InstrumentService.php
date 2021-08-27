@@ -68,22 +68,22 @@ class InstrumentService
             'slug' => $model->inst_slug,
             'description' => $model->inst_description,
             'instrumentType' => [
-                'id' => (!is_null($model->type)) ? $model->type->inst_typ_id : null,
-                'name' => (!is_null($model->type)) ? $model->type->inst_typ_name : null,
+                'id' => (!is_null($model->id_inst_typ)) ? $model->type->inst_typ_id : null,
+                'name' => (!is_null($model->id_inst_typ)) ? $model->type->inst_typ_name : null,
             ],
-            // 'mode' => [
-            //     'id' => (!is_null($model->mode)) ? $model->mode->mode_id : null,
-            //     'name' => (!is_null($model->mode)) ? $model->mode->mode_name : null,
-            //     'year' => [
-            //         'id' => (!is_null($model->mode->year->mode_yea_id)) ? $model->mode->year->mode_yea_id : null,
-            //         'launch' => (!is_null($model->mode->year->mode_yea_launch)) ? $model->mode->year->mode_yea_launch : null,
-            //         'endProduction' => (!is_null($model->mode->year->mode_yea_end_of_production)) ? $model->mode->year->mode_yea_end_of_production : null,
-            //     ]
-            // ],
-            // 'mark' => [
-            //     'id' => (!is_null($model->mark->mark_id)) ? $model->mark->mark_id : null,
-            //     'name' => (!is_null($model->mark->mark_name)) ? $model->mark->mark_name : null,
-            // ],
+            'mode' => [
+                'id' => (!is_null($model->id_mode)) ? $model->model->mode_id : null,
+                'name' => (!is_null($model->id_mode)) ? $model->model->mode_name : null,
+                'year' => [
+                    // 'id' => (!is_null($model->model->id_mode_yea)) ? $model->model->year->mode_yea_id : null,
+                    // 'launch' => (!is_null($model->model->id_mode_yea)) ? $model->model->year->mode_yea_launch : null,
+                    // 'end' => (!is_null($model->model->id_mode_yea)) ? $model->model->year->mode_yea_end_of_production : null,
+                ]
+            ],
+            'mark' => [
+                'id' => (!is_null($model->id_mark)) ? $model->mark->mark_id : null,
+                'name' => (!is_null($model->id_mark)) ? $model->mark->mark_name : null,
+            ],
         ];
     }
 
@@ -93,9 +93,9 @@ class InstrumentService
             'inst_name' => $input['name'],
             'inst_slug' => $input['slug'],
             'inst_description' => $input['description'],
-            'id_inst_typ' => (array_key_exists('idInstrumentType', $input)) ? $input['idInstrumentType'] : null,
-            'id_mode' => (array_key_exists('idMode', $input)) ? $input['idMode'] : null,
-            'id_mark' => (array_key_exists('idMark', $input)) ? $input['idMark'] : null,
+            'id_inst_typ' => isset($input['idInstrumentType']) ? $input['idInstrumentType'] : null,
+            'id_mode' => isset($input['idMode']) ? $input['idMode'] : null,
+            'id_mark' => isset($input['idMark']) ? $input['idMark'] : null,
         ];
     }
 }

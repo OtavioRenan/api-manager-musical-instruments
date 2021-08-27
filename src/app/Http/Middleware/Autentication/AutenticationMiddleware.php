@@ -24,17 +24,18 @@ class AutenticationMiddleware
     public function handle(Request $request, Closure $next)
     {
         try {
+
             $token = $request->bearerToken();
-            
-            if ($token === null) {
-                return redirect('/login')->withError('message', 'Token não informado.');
+
+            if (is_null($token))
+            {
+                return response()->json(['message' => 'Token não informado.'], 401);
             }
 
             return $next($request);
 
-        } catch (\Exception $e) {
-            
-            return redirect('/login')->withError('message', 'Token expirado.');
+        } catch (\Exception $e) {            
+            return response()->json(['message' => 'Token expirado.'], 401);
         }
 
         return $next($request);
