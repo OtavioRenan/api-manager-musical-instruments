@@ -14,7 +14,7 @@ class MarkModel extends Model
     protected $primaryKey = 'mark_id';
 
     protected $fillable = [
-        'mark_nome',
+        'mark_name',
         'mark_slug',
     ];
 
