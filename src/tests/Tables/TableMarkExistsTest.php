@@ -4,8 +4,6 @@ declare(strict_types=1);
 namespace Tests\Tables;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 use App\Models\MarkModel;
