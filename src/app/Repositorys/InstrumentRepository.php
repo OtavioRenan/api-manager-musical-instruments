@@ -47,10 +47,8 @@ class InstrumentRepository
                 $this->model->{$field} = $input[$field];
             }
         }
-
+        
         $this->model->save();
-
-        logStore($this->model);
 
         return $this->model;
     }
@@ -69,16 +67,12 @@ class InstrumentRepository
 
         $model->save();
 
-        logStore($model);
-
         return $model;
     }
 
     public function delete(Int $id)
     {
         $model = $this->model->find($id);
-
-        logDelete($model);
 
         return $model->delete();
     }

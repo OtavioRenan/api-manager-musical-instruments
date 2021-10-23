@@ -71,6 +71,11 @@ return [
             'model' => App\Models\AuthModel::class,
         ],
 
+        'seed' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserModel::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

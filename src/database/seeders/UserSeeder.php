@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
     {
         $model = new \App\Models\AuthModel();
 
+        $model->id = 1;
         $model->name = 'ADMINISTRADOR';
         $model->login = 'admin';
         $model->password = bcrypt('admin');

@@ -19,11 +19,11 @@ class CreateTableLog extends Migration
             $table->integer('system_logable_id');
             $table->string('system_logable_type');
             $table->bigInteger('user_id');
-            $table->string('guard_name');
             $table->string('action');
+            $table->string('ip_address');
+            $table->string('guard_name')->nullable();
             $table->json('old_value')->nullable();
             $table->json('new_value')->nullable();
-            $table->string('ip_address');
             $table->timestamps();
         });
     }
