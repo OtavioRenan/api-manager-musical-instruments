@@ -15,7 +15,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router)
 Route::group(['middleware' => 'autentication'], function ()
 {
     Route::resource('instrument', routeUnion('\Instrument'));
-    Route::resource('instruments-type', routeUnion('\InstrumentType'));
+    Route::resource('instrument-type', routeUnion('\InstrumentType'));
     Route::resource('mark', routeUnion('\Mark'));
     Route::resource('model', routeUnion('\Model'));
     Route::resource('model-year', routeUnion('\ModelYear'));

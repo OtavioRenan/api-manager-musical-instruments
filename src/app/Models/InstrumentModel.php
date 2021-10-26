@@ -5,11 +5,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\LogTrait;
 
 class InstrumentModel extends Model
 {
-    use HasFactory, LogTrait;
+    use HasFactory;
 
     protected $table = 'instruments';
     protected $primaryKey = 'inst_id';
@@ -19,7 +18,6 @@ class InstrumentModel extends Model
         'inst_slug',
         'inst_description',
         'id_inst_typ',
-        'module_name',
         'id_mode',
         'id_mark'
     ];

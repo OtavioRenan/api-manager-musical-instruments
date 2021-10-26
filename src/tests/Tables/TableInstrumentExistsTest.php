@@ -14,13 +14,13 @@ use App\Models\InstrumentModel;
 class TableInstrumentExistsTest extends TestCase
 {
     use DatabaseMigrations;
-    
+
     protected $model;
 
     public function setUp() : void
     {
         parent::setUp();
-        
+
         $this->model = new InstrumentModel();
     }
 
