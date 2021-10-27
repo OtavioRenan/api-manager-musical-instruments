@@ -27,23 +27,36 @@ class InstrumentTypeRouteTest extends TestCase
     /** @test */
     public function route_get_return_datas()
     {
-        $this->factory();
+        $factory = $this->factory();
 
         $this->withoutMiddleware();
 
         $response = $this->call('GET', '/api/instrument-type');
+        $this->assertEquals($response->getStatusCode(), 200);
+        $this->assertEquals($response->getData(), $factory);
     }
 
     /** @test */
     public function route_find_return_datas()
     {
+        $factory = $this->factory();
 
+        $this->withoutMiddleware();
+
+        $response = $this->call('GET', '/api/instrument-type/' . $factory['id']);
+        $this->assertEquals($response->getStatusCode(), 200);
+        $this->assertEquals($response->getData(), $factory);
     }
 
     /** @test */
     public function route_save_return_datas()
     {
+        $objetc = $this->newObject();
 
+        $this->withoutMiddleware();
+
+        $response = $this->call('GET', '/api/instrument-type', $objetc);
+        $this->assertEquals($response->getStatusCode(), 200);
     }
 
     /** @test */
@@ -58,8 +71,21 @@ class InstrumentTypeRouteTest extends TestCase
 
     }
 
-    private function factory() : InstrumentTypeModel
+    private function factory() : Array
     {
-        return InstrumentTypeModel::factory()->make();
+        $model = InstrumentTypeModel::factory()->make();
+        return [
+            'id' => $model->inst_typ_id,
+            'name' => $model->inst_typ_name,
+            'slug' => $model->inst_typ_slug,
+        ];
+    }
+
+    private function newObject() : Array
+    {
+        return [
+            'name' => 'Instrument Test',
+            'slug' => 'instrument-test',
+        ];
     }
 }

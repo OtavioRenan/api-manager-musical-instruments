@@ -22,6 +22,7 @@ class InstrumentTypeModelFactory extends Factory
     public function definition()
     {
         return [
+            'inst_typ_id' => 1,
             'inst_typ_name' => $this->faker->name(),
             'inst_typ_slug' => $this->faker->slug(),
         ];
