@@ -20,7 +20,7 @@ class InstrumentModel extends Model
         'id_inst_typ',
         'id_mode',
         'id_mark'
-    ];
+    ]; 
 
     public function type()
     {
