@@ -4,17 +4,17 @@ declare(strict_types=1);
 namespace Tests\Api\Routes;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Models\InstrumentTypeModel;
+use App\Models\ModelModel;
 use Tests\TestCase;
 
 /**
- * @group instrumentType
+ * @group model
  */
-class InstrumentTypeRouteTest extends TestCase
+class ModelRouteTest extends TestCase
 {
     use DatabaseMigrations;
 
-    private $route = '/api/instrument-type/';
+    private $route = '/api/model/';
 
     /** @test */
     public function route_need_autentication()
@@ -137,12 +137,13 @@ class InstrumentTypeRouteTest extends TestCase
 
     private function factory() : Array
     {
-        $model = InstrumentTypeModel::factory()->create();
+        $model = ModelModel::factory()->create();
         return [
             [
-                'id' => $model->inst_typ_id,
-                'name' => $model->inst_typ_name,
-                'slug' => $model->inst_typ_slug,
+                'id' => $model->mode_id,
+                'name' => $model->mode_name,
+                'slug' => $model->mode_slug,
+                'year' => []
             ]
         ];
     }
@@ -150,8 +151,8 @@ class InstrumentTypeRouteTest extends TestCase
     private function newObject() : Array
     {
         return [
-            'name' => 'Instrument Test',
-            'slug' => 'instrument-test',
+            'name' => 'Model Test',
+            'slug' => 'model-test',
         ];
     }
 

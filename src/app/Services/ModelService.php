@@ -62,16 +62,23 @@ class ModelService
 
     private function filterOutput(\App\Models\ModelModel $model) : Array
     {
-        return [
+        $datas = [
             'id' => $model->mode_id,
             'name' => $model->mode_name,
             'slug' => $model->mode_slug,
-            'year' => [
-                'id' => (!is_null($model->id_mode_yea)) ? $model->year->model_yea_id : null,
-                'launch' => (!is_null($model->id_mode_yea)) ? $model->year->mode_yea_launch : null,
-                'end' => (!is_null($model->id_mode_yea)) ? $model->year->mode_yea_end_of_production : null
-            ]
+            'year' => []
         ];
+
+        if(!is_null($model->year))
+        {
+            $datas['year'] = [
+                'id' => (!is_null($model->year->model_yea_id)) ? $model->year->model_yea_id : null,
+                'launch' => (!is_null($model->year->mode_yea_launch)) ? $model->year->mode_yea_launch : null,
+                'end' => (!is_null($model->year->mode_yea_end_of_production)) ? $model->year->mode_yea_end_of_production : null
+            ];
+        }
+
+        return $datas;
     }
 
     private function filterInput(Array $input) : Array

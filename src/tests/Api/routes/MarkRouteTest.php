@@ -4,17 +4,17 @@ declare(strict_types=1);
 namespace Tests\Api\Routes;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Models\InstrumentTypeModel;
+use App\Models\MarkModel;
 use Tests\TestCase;
 
 /**
- * @group instrumentType
+ * @group mark
  */
-class InstrumentTypeRouteTest extends TestCase
+class MarkRouteTest extends TestCase
 {
     use DatabaseMigrations;
 
-    private $route = '/api/instrument-type/';
+    private $route = '/api/mark/';
 
     /** @test */
     public function route_need_autentication()
@@ -137,12 +137,12 @@ class InstrumentTypeRouteTest extends TestCase
 
     private function factory() : Array
     {
-        $model = InstrumentTypeModel::factory()->create();
+        $model = MarkModel::factory()->create();
         return [
             [
-                'id' => $model->inst_typ_id,
-                'name' => $model->inst_typ_name,
-                'slug' => $model->inst_typ_slug,
+                'id' => $model->mark_id,
+                'name' => $model->mark_name,
+                'slug' => $model->mark_slug,
             ]
         ];
     }
@@ -150,8 +150,8 @@ class InstrumentTypeRouteTest extends TestCase
     private function newObject() : Array
     {
         return [
-            'name' => 'Instrument Test',
-            'slug' => 'instrument-test',
+            'name' => 'Mark Test',
+            'slug' => 'mark-test',
         ];
     }
 
