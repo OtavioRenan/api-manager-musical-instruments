@@ -28,13 +28,6 @@ class InstrumentTypeSeeder extends Seeder
                 'inst_typ_name' => $type['inst_typ_name'],
                 'inst_typ_slug' => \Illuminate\Support\Str::slug($type['inst_typ_name'])
             ]);
-
-            /* Não roda usando a trait como sistema de log
-            $model = new \App\Models\InstrumentTypeModel();
-            $model->inst_typ_name = $type['inst_typ_name'];
-            $model->inst_typ_slug = \Illuminate\Support\Str::slug($type['inst_typ_name']);
-            $model->save();
-            */
         }
     }
 }

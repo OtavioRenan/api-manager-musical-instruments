@@ -21,14 +21,5 @@ class UserSeeder extends Seeder
             'login' => 'admin',
             'password' => bcrypt('admin')
         ]);
-
-        /* Não roda usando a trait como sistema de log
-        $model = new \App\Models\AuthModel();
-        $model->id = 1;
-        $model->name = 'ADMINISTRADOR';
-        $model->login = 'admin';
-        $model->password = bcrypt('admin');
-        $model->save();
-        */
     }
 }
