@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\ModelModel;
+use App\Models\InstrumentModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ModelModelFactory extends Factory
+class InstrumentModelFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ModelModel::class;
+    protected $model = InstrumentModel::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,10 @@ class ModelModelFactory extends Factory
     public function definition()
     {
         return [
-            'mode_id' => $this->faker->randomDigitNotNull(),
-            'mode_name' => $this->faker->name(),
-            'mode_slug' => $this->faker->slug(),
+            'inst_id' => $this->faker->randomDigitNotNull(),
+            'inst_name' => $this->faker->name(),
+            'inst_slug' => $this->faker->slug(),
+            'inst_description' => $this->faker->name(),
         ];
     }
 }

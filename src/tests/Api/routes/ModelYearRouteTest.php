@@ -4,17 +4,17 @@ declare(strict_types=1);
 namespace Tests\Api\Routes;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Models\InstrumentTypeModel;
+use App\Models\ModelYearModel;
 use Tests\TestCase;
 
 /**
- * @group instrumentType
+ * @group year
  */
-class InstrumentTypeRouteTest extends TestCase
+class ModelYearRouteTest extends TestCase
 {
     use DatabaseMigrations;
 
-    private $route = '/api/instrument-type/';
+    private $route = '/api/model-year/';
 
     /** @test */
     public function route_need_autentication()
@@ -86,13 +86,11 @@ class InstrumentTypeRouteTest extends TestCase
     /** @test */
     public function access_route_create_return_object_created()
     {
-
         $objetc = $this->newObject();
 
         $this->withoutMiddleware();
 
         $response = $this->call('POST', $this->route, $objetc);
-
         $this->assertTrue($this->createdIsEqual((array)$response->getData(), $objetc));
         $this->assertEquals($response->getStatusCode(), 200);
     }
@@ -106,7 +104,6 @@ class InstrumentTypeRouteTest extends TestCase
         $this->withoutMiddleware();
 
         $response = $this->call('PUT', $this->route . $factory[0]['id'], $objetc);
-
         $this->assertEquals($response->getStatusCode(), 422);
     }
 
@@ -119,7 +116,6 @@ class InstrumentTypeRouteTest extends TestCase
         $this->withoutMiddleware();
 
         $response = $this->call('PUT', $this->route . $factory[0]['id'], $objetc);
-
         $this->assertEquals($response->getStatusCode(), 200);
         $this->assertTrue($this->createdIsEqual((array)$response->getData(), $objetc));
     }
@@ -137,12 +133,12 @@ class InstrumentTypeRouteTest extends TestCase
 
     private function factory() : Array
     {
-        $model = InstrumentTypeModel::factory()->create();
+        $model = ModelYearModel::factory()->create();
         return [
             [
-                'id' => $model->inst_typ_id,
-                'name' => $model->inst_typ_name,
-                'slug' => $model->inst_typ_slug,
+                'id' => $model->mode_yea_id,
+                'launch' => $model->mode_yea_launch,
+                'end' => $model->mode_yea_end_of_production
             ]
         ];
     }
@@ -150,8 +146,8 @@ class InstrumentTypeRouteTest extends TestCase
     private function newObject() : Array
     {
         return [
-            'name' => 'Instrument Type Test',
-            'slug' => 'instrument-type-test',
+            'launch' => '2020-12-25',
+            'end' => '2021-02-02',
         ];
     }
 

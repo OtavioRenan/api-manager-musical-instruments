@@ -22,7 +22,7 @@ class LogModelFactory extends Factory
     public function definition()
     {
         return [
-            'logs_id' => 1,
+            'logs_id' => $this->faker->randomDigitNotNull(),
             'system_logable_id' => $this->faker->randomDigitNotNull,
             'system_logable_type' => $this->faker->name,
             'user_id '=> $this->faker->randomDigitNotNull,

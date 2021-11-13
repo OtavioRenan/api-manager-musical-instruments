@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\ModelModel;
+use App\Models\ModelYearModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ModelModelFactory extends Factory
+class ModelYearModelFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ModelModel::class;
+    protected $model = ModelYearModel::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,9 @@ class ModelModelFactory extends Factory
     public function definition()
     {
         return [
-            'mode_id' => $this->faker->randomDigitNotNull(),
-            'mode_name' => $this->faker->name(),
-            'mode_slug' => $this->faker->slug(),
+            'mode_yea_id' => $this->faker->randomDigitNotNull(),
+            'mode_yea_launch' => $this->faker->date(),
+            'mode_yea_end_of_production' => $this->faker->date(),
         ];
     }
 }

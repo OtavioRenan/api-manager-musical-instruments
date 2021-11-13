@@ -22,7 +22,7 @@ class UserModelFactory extends Factory
     public function definition()
     {
         return [
-            'id' => 1,
+            'id' => $this->faker->randomDigitNotNull(),
             'name' => 'Tester',
             'login' => 'tester@email.com',
             'password' => bcrypt('teste')

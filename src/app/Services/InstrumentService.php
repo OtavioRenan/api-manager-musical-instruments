@@ -62,29 +62,51 @@ class InstrumentService
 
     private function filterOutput(\App\Models\InstrumentModel $model) : Array
     {
-        return [
+        $datas = [
             'id' => $model->inst_id,
             'name' => $model->inst_name,
             'slug' => $model->inst_slug,
             'description' => $model->inst_description,
-            'instrumentType' => [
+            'instrumentType' => [],
+            'mode' => [],
+            'mark' => [],
+        ];
+
+        if($model->type)
+    {            
+            $datas['instrumentType'] = [
                 'id' => (!is_null($model->id_inst_typ)) ? $model->type->inst_typ_id : null,
                 'name' => (!is_null($model->id_inst_typ)) ? $model->type->inst_typ_name : null,
-            ],
-            'mode' => [
-                'id' => (!is_null($model->id_mode)) ? $model->model->mode_id : null,
-                'name' => (!is_null($model->id_mode)) ? $model->model->mode_name : null,
-                'year' => [
-                    // 'id' => (!is_null($model->model->id_mode_yea)) ? $model->model->year->mode_yea_id : null,
-                    // 'launch' => (!is_null($model->model->id_mode_yea)) ? $model->model->year->mode_yea_launch : null,
-                    // 'end' => (!is_null($model->model->id_mode_yea)) ? $model->model->year->mode_yea_end_of_production : null,
-                ]
-            ],
-            'mark' => [
-                'id' => (!is_null($model->id_mark)) ? $model->mark->mark_id : null,
-                'name' => (!is_null($model->id_mark)) ? $model->mark->mark_name : null,
-            ],
-        ];
+            ];
+        }
+
+        if($model->model)
+        {
+            $datas['mode'] = [
+                'id' => $model->model->mode_id,
+                'name' => $model->model->mode_name,
+                'year' => []
+            ];
+
+            if($model->model->year)
+            {
+                $datas['mode']['year'] = [
+                    'id' => $model->model->year->mode_yea_id,
+                    'launch' => $model->model->year->mode_yea_id,
+                    'end' => $model->model->year->mode_yea_end_of_production
+                ];
+            }
+        }
+
+        if($model->mark)
+        {
+            $datas['mark'] = [
+                'id' => $model->mark->mark_id,
+                'name' => $model->mark->mark_name,
+            ];
+        }
+
+        return $datas;
     }
 
     private function filterInput(Array $input) : Array

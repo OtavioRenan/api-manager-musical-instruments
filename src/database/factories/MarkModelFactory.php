@@ -22,7 +22,7 @@ class MarkModelFactory extends Factory
     public function definition()
     {
         return [
-            'mark_id' => 1,
+            'mark_id' => $this->faker->randomDigitNotNull(),
             'mark_name' => $this->faker->name(),
             'mark_slug' => $this->faker->slug(),
         ];
