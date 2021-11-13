@@ -3,17 +3,40 @@ declare(strict_types=1);
 
 namespace App\Repositorys;
 
+use App\Models\AuthModel;
+
 class AutenticationRepository
 {
     protected $model;
 
-    public function __construct(\App\Models\UserModel $userModel)
+    protected $fields = [
+        'name',
+        'login',
+        'password'
+    ];
+
+    public function __construct(AuthModel $authModel)
     {
-        $this->model = $userModel;
+        $this->model = $authModel;
     }
 
-    public function getWhere(array $input)
+    public function getWhere(string $input)
     {
-        return $this->model->where('user_login', '=', $input['user_login'])->first();
+        return $this->model->where('login', '=', $input)->first();
+    }
+
+    public function register(array $input) : AuthModel
+    {
+        foreach ($this->fields as $field)
+        {
+            if (isset($input[$field]))
+            {
+                $this->model->{$field} = $input[$field];
+            }
+        }
+
+        $this->model->save();
+
+        return $this->model;
     }
 }

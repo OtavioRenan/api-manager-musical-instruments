@@ -27,7 +27,7 @@ class InstrumentRepository
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\InstrumentExistsException();
+            throw new \Exception('Instrumento não encontrado.');
         }
 
         return $model;
@@ -47,7 +47,7 @@ class InstrumentRepository
                 $this->model->{$field} = $input[$field];
             }
         }
-
+        
         $this->model->save();
 
         return $this->model;
@@ -79,16 +79,16 @@ class InstrumentRepository
 
     public function getWhere(Array $input)
     {
-        $model = $this->model->orderBy('inst_name', 'ASC');
+        $fields = $this->fields;
 
-        if (isset($input['name']))
-        {
-            $model = $model->where('inst_name', 'ilike', '%'.$input['name'].'%');
-        }
+        $model = $this->model->orderBy($fields[0], 'ASC');
 
-        if (isset($input['description']))
+        foreach($fields as $field)
         {
-            $model = $model->where('inst_description', 'ilike', '%'.$input['description'].'%');
+            if (isset($input[$field]))
+            {
+                $model = $model->where($field, 'ilike', '%' . $input[$field] . '%');
+            }
         }
 
         return $model->get();

@@ -13,7 +13,8 @@ class CreateTableInstrumentType extends Migration
      */
     public function up()
     {
-        Schema::create('instrument_type', function (Blueprint $table) {
+        Schema::create('instrument_types', function (Blueprint $table)
+        {
             $table->id('inst_typ_id');
             $table->string('inst_typ_name');
             $table->string('inst_typ_slug');
@@ -28,6 +29,6 @@ class CreateTableInstrumentType extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('instrument_type');
+        Schema::dropIfExists('instrument_types');
     }
 }

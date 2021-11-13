@@ -3,34 +3,37 @@ declare(strict_types=1);
 
 namespace App\Repositorys;
 
+use App\Models\UserModel;
+use Illuminate\Support\Collection;
+
 class UserRepository
 {
     protected $model;
 
     protected $fields = [
-        'user_name',
-        'user_login',
-        'user_password'
+        'name',
+        'login',
+        'password'
     ];
 
-    public function __construct(\App\Models\UserModel $userModel)
+    public function __construct(UserModel $userModel)
     {
         $this->model = $userModel;
     }
 
-    public function find(int $id)
+    public function find(int $id) : UserModel
     {
-        $model = $this->model->where('user_id', '=', $id)->first();
+        $model = $this->model->where('id', '=', $id)->first();
 
         if (!$model)
         {
-            throw new \App\Http\Exceptions\UserExistsException();
+            throw new \Exception('Usuário não encontrado.');
         }
 
         return $model;
     }
 
-    public function all()
+    public function all() : Collection
     {
         return $this->model->all();
     }
@@ -50,7 +53,7 @@ class UserRepository
         return $this->model;
     }
 
-    public function update(Int $id, Array $input)
+    public function update(Int $id, Array $input) : UserModel
     {
         $model = $this->model->find($id);
 
@@ -74,18 +77,18 @@ class UserRepository
         return $model->delete();
     }
 
-    public function getWhere(Array $input)
+    public function getWhere(Array $input) : Collection
     {
-        $model = $this->model->orderBy('user_name', 'ASC');
+        $fields = $this->fields;
 
-        if (isset($input['name']))
-        {
-            $model = $model->where('user_name', 'ilike', '%'.$input['name'].'%');
-        }
+        $model = $this->model->orderBy($fields[0], 'ASC');
 
-        if (isset($input['login']))
+        foreach($fields as $field)
         {
-            $model = $model->where('user_login', 'ilike', '%'.$input['login'].'%');
+            if (isset($input[$field]))
+            {
+                $model = $model->where($field, 'ilike', '%' . $input[$field] . '%');
+            }
         }
 
         return $model->get();

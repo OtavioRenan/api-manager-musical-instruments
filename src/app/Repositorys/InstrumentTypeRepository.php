@@ -23,7 +23,7 @@ class InstrumentTypeRepository
 
         if (!$model)
         {
-            throw new \App\Http\Exception\InstrumentTypeExistsException();
+            throw new \Exception('Tipo de instrumento não encontrado.');
         }
 
         return $model;
@@ -75,11 +75,16 @@ class InstrumentTypeRepository
 
     public function getWhere(Array $input)
     {
-        $model = $this->model->orderBy('inst_typ_name', 'ASC');
+        $fields = $this->fields;
 
-        if (isset($input['name']))
+        $model = $this->model->orderBy($fields[0], 'ASC');
+
+        foreach($fields as $field)
         {
-            $model = $model->where('inst_typ_name', 'ilike', '%'.$input['name'].'%');
+            if (isset($input[$field]))
+            {
+                $model = $model->where($field, 'ilike', '%' . $input[$field] . '%');
+            }
         }
 
         return $model->get();

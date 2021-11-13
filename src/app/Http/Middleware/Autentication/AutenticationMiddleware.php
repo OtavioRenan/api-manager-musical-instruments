@@ -4,6 +4,7 @@ namespace App\Http\Middleware\Autentication;
 
 use Closure;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AutenticationMiddleware
 {
@@ -24,20 +25,19 @@ class AutenticationMiddleware
     public function handle(Request $request, Closure $next)
     {
         try {
+            
             $token = $request->bearerToken();
 
-            if ($token === null) {
-                return response()->json(['message' => 'Token não informado.'], 500);
+            if (is_null($token))
+            {
+                return response()->json(['message' => 'Token não informado.'], 401);
             }
 
-            $datas = $this->service->extractDatas($token);
-
-            $request->request->add(['user' => $datas->data->id]);
+            JWTAuth::parseToken()->authenticate();
 
             return $next($request);
 
-        } catch (\Firebase\JWT\ExpiredException $e) {
-
+        } catch (\Exception $e) {            
             return response()->json(['message' => 'Token expirado.'], 401);
         }
 

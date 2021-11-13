@@ -13,7 +13,9 @@ class CreateTableModel extends Migration
      */
     public function up()
     {
-        Schema::create('model', function (Blueprint $table) {
+        Schema::dropIfExists('models');
+        Schema::create('models', function (Blueprint $table)
+        {
             $table->id('mode_id');
             $table->string('mode_name');
             $table->string('mode_slug');
@@ -22,7 +24,7 @@ class CreateTableModel extends Migration
 
             $table->foreign('id_mode_yea')
                 ->references('mode_yea_id')
-                ->on('model_year')
+                ->on('model_years')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
@@ -36,6 +38,6 @@ class CreateTableModel extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('model');
+        Schema::dropIfExists('models');
     }
 }

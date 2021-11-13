@@ -13,7 +13,8 @@ class CreateTableMark extends Migration
      */
     public function up()
     {
-        Schema::create('mark', function (Blueprint $table) {
+        Schema::create('marks', function (Blueprint $table)
+        {
             $table->id('mark_id');
             $table->string('mark_name');
             $table->string('mark_slug');
@@ -28,6 +29,6 @@ class CreateTableMark extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mark');
+        Schema::dropIfExists('marks');
     }
 }

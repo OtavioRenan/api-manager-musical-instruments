@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class InstrumentTypeSeeder extends Seeder
 {
@@ -23,11 +24,10 @@ class InstrumentTypeSeeder extends Seeder
 
         foreach($types as $type)
         {
-            $model = new \App\Main\InstrumentType\Model\InstrumentTypeModel();
-
-            $model->inst_typ_name = $type['inst_typ_name'];
-            $model->inst_typ_slug = \Illuminate\Support\Str::slug($type['inst_typ_name']);
-            $model->save();
+            DB::table('instrument_types')->insert([
+                'inst_typ_name' => $type['inst_typ_name'],
+                'inst_typ_slug' => \Illuminate\Support\Str::slug($type['inst_typ_name'])
+            ]);
         }
     }
 }

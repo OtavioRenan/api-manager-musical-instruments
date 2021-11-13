@@ -13,9 +13,5 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(InstrumentTypeSeeder::class);
-        // $this->call(ModelYearSeeder::class);
-        // $this->call(ModelSeeder::class);
-        // $this->call(MarkSeeder::class);
-        // $this->call(InstrumentSeeder::class);
     }
 }

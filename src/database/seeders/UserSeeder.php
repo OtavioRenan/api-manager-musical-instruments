@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -14,12 +15,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $model = new \App\Main\User\Model\UserModel();
-
-        $model->user_name = 'ADMINISTRADOR';
-        $model->user_login = 'admin';
-        $model->user_password = \Illuminate\Support\Facades\Hash::make('admin');
-
-        $model->save();
+        DB::table('users')->insert([
+            'id' => 1,
+            'name' => 'ADMINISTRADOR',
+            'login' => 'admin',
+            'password' => bcrypt('admin')
+        ]);
     }
 }

@@ -13,7 +13,8 @@ class CreateTableInstrument extends Migration
      */
     public function up()
     {
-        Schema::create('instrument', function (Blueprint $table) {
+        Schema::create('instruments', function (Blueprint $table)
+        {
             $table->id('inst_id');
             $table->string('inst_name');
             $table->string('inst_slug');
@@ -25,21 +26,21 @@ class CreateTableInstrument extends Migration
 
             $table->foreign('id_inst_typ')
                 ->references('inst_typ_id')
-                ->on('instrument_type')
+                ->on('instrument_types')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreign('id_mode')
                 ->references('mode_id')
-                ->on('model')
+                ->on('models')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreign('id_mark')
                 ->references('mark_id')
-                ->on('mark')
+                ->on('marks')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
@@ -53,6 +54,6 @@ class CreateTableInstrument extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('instrument');
+        Schema::dropIfExists('instruments');
     }
 }
